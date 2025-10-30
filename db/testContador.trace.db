@@ -1,0 +1,24 @@
+2025-10-30 09:11:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table contadores(nombre varchar(255),cuenta int)[*]);"
+Syntax error in SQL statement "create table contadores(nombre varchar(255),cuenta int)[*]);"; SQL statement:
+create table contadores(nombre varchar(255),cuenta int)); [42000-220]
+2025-10-30 09:12:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor Invalido "1000" para el parametro "resultSetType"
+Invalid value "1000" for parameter "resultSetType" [90008-220]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:658)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcConnection.checkTypeConcurrency(JdbcConnection.java:1342)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:636)
+	at r2ud2/apartado1.ContadorSqlTransaccionalResUpdateable.main(ContadorSqlTransaccionalResUpdateable.java:25)
+2025-10-30 09:14:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor Invalido "1000" para el parametro "resultSetType"
+Invalid value "1000" for parameter "resultSetType" [90008-220]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:658)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcConnection.checkTypeConcurrency(JdbcConnection.java:1342)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:636)
+	at r2ud2/apartado1.ContadorSqlTransaccionalResUpdateable.main(ContadorSqlTransaccionalResUpdateable.java:26)
