@@ -1,19 +1,57 @@
 package apartado1;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class H2Prueba {
+	
+  private static final String ARCHIVO_PROPERTIES = "properties.ini";
+  private static final String ARCHIVO_BD = "test";
 
 	public static void main(String[] args) {
+		
+		Properties properties = new Properties();		
+		File propertiesFile = new File(ARCHIVO_PROPERTIES);
 
+		//Creación si el archivo no existe
+		if(!propertiesFile.exists()) {
+			System.out.println("Se creará un archivo properties con nombre:" + ARCHIVO_PROPERTIES);
+			try {
+				crearProperties(propertiesFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//Carga del fichero properties
+		try(FileInputStream inputStream = new FileInputStream(ARCHIVO_PROPERTIES)){
+			properties.load(inputStream);
+		}catch (IOException e) {
+			System.out.println("Error en lectura");
+		}
+		
+		//Para la concatenación
+		// Valor archivo
+		String pathIni = properties.getProperty("path");
+		String userIni = properties.getProperty("user");
+		String passIni = properties.getProperty("password");
+		
+		//bloque try de la conexión con H2
 		try {
 			//H2 crea directamente el archivo en la conexión si no existe, incluyendo carpetas
-			Connection connection = DriverManager.getConnection("jdbc:h2:./db/test");
+			// No se requiere usuario y contraseña 
+			//Connection connection = DriverManager.getConnection("jdbc:h2:./db/test");
+			Connection connection = DriverManager.getConnection("jdbc:h2:"+pathIni+ARCHIVO_BD); //Resultado igual al connection superior
 			System.out.println("Conexión correcta\n");
 			
 			crearTabla(connection);
@@ -22,6 +60,7 @@ public class H2Prueba {
 			
 			connection.close();
 		} catch (SQLException e) {
+			System.out.println("Error en la conexión a la BBDD");
 			e.printStackTrace();
 		}
 		
@@ -90,6 +129,24 @@ public class H2Prueba {
             System.out.println(nombreAux + " Cuenta: " + contadorAux);
         }
 		
+	}
+	
+	
+	/**
+	 * Crea un archivo properties con path, user y password para el conector jdbc
+	 * @param Archivo a crear
+	 * @throws IOException en la creacion del fichero
+	 */
+	
+	public static void crearProperties(File archivo) throws IOException {
+		Properties pr = new Properties();
+		pr.setProperty("path", "./db/"); //Directorio del proyecto
+		pr.setProperty("user", "dam2"); //user placeholder
+		pr.setProperty("password", "asdf.1234");
+		
+		FileOutputStream salida = new FileOutputStream(archivo);
+		pr.store(salida, "Creacion del archivo: "+archivo.toString());
+		System.out.println("Archivo " + archivo.toString() + " creado correctamente");
 	}
 
 }
