@@ -55,7 +55,7 @@ public class H2Prueba {
 			System.out.println("Conexión correcta\n");
 			
 			crearTabla(connection);
-			//insertarTablaDefault(connection);
+			insertarTablaDefault(connection);
 			recuperarTabla(connection);
 			
 			connection.close();

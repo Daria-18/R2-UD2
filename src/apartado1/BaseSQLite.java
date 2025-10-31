@@ -1,3 +1,5 @@
+package apartado1;
+
 import java.sql.*;
 
 
@@ -6,7 +8,7 @@ public class BaseSQLite {
 	public static void main(String[] args){
 		Connection miConexion=null;
 		try {
-			String ruta="jdbc:sqlite:./sqlite/contadores.db";
+			String ruta="jdbc:sqlite:./db/contadores.db";
 			 miConexion= DriverManager.getConnection(ruta);
 			 System.out.println("Conexion establecida");
 			 
