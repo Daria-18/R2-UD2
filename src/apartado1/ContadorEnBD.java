@@ -15,8 +15,10 @@ public class ContadorEnBD {
 		final String claveContador = "contador1";
 
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/contadores",
-					"contadores", "987654321");
+			//Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/contadores",
+				//	"contadores", "987654321");
+			Connection connection = DriverManager.getConnection("jdbc:h2:./db/testContador");
+			
 			PreparedStatement consulta = connection.prepareStatement(sqlConsulta);
 			PreparedStatement actualización = connection.prepareStatement(sqlActualización);
 			int cuenta = 0;
