@@ -1,4 +1,4 @@
-package apartado1;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,12 +7,23 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ContadorSqlTransaccionalResUpdateable {
+	
+	private static String cadenaConexion =  "jdbc:mysql://localhost:3306/adat";
+	private static String user = "dam2";
+	private static String pass = "asdf.1234";
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		// Prueba de concepto de transacción con bloqueo de fila para lectura
 		// Sería más fácil en el propio sql poner un set cuenta=cuenta+1 pero ilustramos
 		// aquí el problema de concurrencia entre varios procesos.
 		// con el for update + transacción conseguimos el bloque de fila y atomicidad
+		
+		/*
+		String sqlCreacionBaseDatos = "create table if not exists contadores("
+				+ "nombre varchar(255) primary key,"
+				+ "cuenta int);";
+				*/
+		
 		String sqlCreacion = "create table if not exists contadores("
 				+ "nombre varchar(255) primary key,"
 				+ "cuenta int);";
@@ -22,11 +33,11 @@ public class ContadorSqlTransaccionalResUpdateable {
 		
 		try{
 			//Connection connection = DriverManager.getConnection("jdbc:sqlite:./sqlite/testContador");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testContador:root:root");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/adat3","dam2","asdf.1234");
 			PreparedStatement soltarTabla = connection.prepareStatement(sqlTableDrop);
-			soltarTabla.execute();
-			System.out.println("Tabla borrada");
-			
+			//soltarTabla.execute();
+			//System.out.println("Tabla borrada");
+			/*
 			PreparedStatement creacion = connection.prepareStatement(sqlCreacion);
 			creacion.execute();
 			System.out.println("Tabla creada");
@@ -37,7 +48,7 @@ public class ContadorSqlTransaccionalResUpdateable {
 				rellena.setInt(2, i);
 				rellena.execute();
 			}
-			
+			*/
 			PreparedStatement consulta = connection.prepareStatement(sqlConsulta,ResultSet.FETCH_FORWARD,
 																			ResultSet.CONCUR_UPDATABLE);
 			int cuenta = 0;
