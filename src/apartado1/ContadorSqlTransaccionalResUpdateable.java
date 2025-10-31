@@ -1,4 +1,4 @@
-
+package apartado1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,9 +35,10 @@ public class ContadorSqlTransaccionalResUpdateable {
 			//Connection connection = DriverManager.getConnection("jdbc:sqlite:./sqlite/testContador");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/adat3","dam2","asdf.1234");
 			PreparedStatement soltarTabla = connection.prepareStatement(sqlTableDrop);
-			//soltarTabla.execute();
-			//System.out.println("Tabla borrada");
 			/*
+			soltarTabla.execute();
+			System.out.println("Tabla borrada");
+			
 			PreparedStatement creacion = connection.prepareStatement(sqlCreacion);
 			creacion.execute();
 			System.out.println("Tabla creada");
